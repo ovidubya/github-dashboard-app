@@ -1,17 +1,19 @@
 import * as React from "react";
 import ReactDOM from "react-dom";
 import defaultConfig from "./config.json";
-import { Repo, GithubAuthButtton } from "./components";
+import { Repo, GithubAuthButtton, InputRange } from "./components";
 import { GlobalStyles } from "./theme/globalStyles";
 import styled, { ThemeProvider } from "styled-components";
 import { theme } from "./theme/theme";
 import { AuthContext } from "./context/auth";
+import { PollingContext } from "./context/poll";
 
 interface AppProps {}
 
 const App: React.FC<AppProps> = () => {
   const [repos, setRepos] = React.useState(defaultConfig.repos);
   const [authToken, setAuthToken] = React.useState("");
+  const [pollTiming, setPollTiming] = React.useState("10000");
 
   return (
     <ThemeProvider theme={theme}>
@@ -21,15 +23,18 @@ const App: React.FC<AppProps> = () => {
         <Container>
           <HeaderText>Github Dashboard</HeaderText>
           <HeaderText>Click to vote</HeaderText>
-          <RepoContainer>
-            {repos.map((repo, index) => {
-              return (
-                <Repo repoName={repo.repo} repoOwner={repo.owner} key={index}>
-                  {repo.owner}
-                </Repo>
-              );
-            })}
-          </RepoContainer>
+          <PollingContext.Provider value={{ pollTiming, setPollTiming }}>
+            <InputRange />
+            <RepoContainer>
+              {repos.map((repo, index) => {
+                return (
+                  <Repo repoName={repo.repo} repoOwner={repo.owner} key={index}>
+                    {repo.owner}
+                  </Repo>
+                );
+              })}
+            </RepoContainer>
+          </PollingContext.Provider>
         </Container>
       </AuthContext.Provider>
     </ThemeProvider>

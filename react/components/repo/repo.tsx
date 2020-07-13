@@ -7,6 +7,8 @@ import {
 } from "../../../lib/services/github";
 import defaultConfig from "../../config.json";
 import { AuthContext } from "../../context/auth";
+import { useInterval } from "../../hooks/useInterval";
+import { PollingContext } from "../../context/poll";
 
 interface RepoProps {
   repoName: string;
@@ -27,10 +29,10 @@ export const Repo: React.FC<RepoProps> = ({
   const [commitsInThreeWeeks, setCommitsInThreeWeeks] = React.useState<string>(
     ""
   );
-
   const { authToken } = React.useContext(AuthContext);
+  const { pollTiming } = React.useContext(PollingContext);
 
-  React.useEffect(() => {
+  const updateStats = () => {
     if (
       defaultConfig.filters.selected.includes("Forks") ||
       defaultConfig.filters.selected.includes("Issues") ||
@@ -65,6 +67,14 @@ export const Repo: React.FC<RepoProps> = ({
         }
       );
     }
+  };
+
+  useInterval(() => {
+    updateStats();
+  }, pollTiming);
+
+  React.useEffect(() => {
+    updateStats();
   }, []);
 
   return (
