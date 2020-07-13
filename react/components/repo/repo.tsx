@@ -6,6 +6,7 @@ import {
   getCodeFrequency,
 } from "../../../lib/services/github";
 import defaultConfig from "../../config.json";
+import { AuthContext } from "../../context/auth";
 
 interface RepoProps {
   repoName: string;
@@ -27,6 +28,8 @@ export const Repo: React.FC<RepoProps> = ({
     ""
   );
 
+  const { authToken } = React.useContext(AuthContext);
+
   React.useEffect(() => {
     if (
       defaultConfig.filters.selected.includes("Forks") ||
@@ -34,7 +37,7 @@ export const Repo: React.FC<RepoProps> = ({
       defaultConfig.filters.selected.includes("Watchers") ||
       defaultConfig.filters.selected.includes("Stars")
     ) {
-      getRepoStats(repoOwner, repoName).then((data) => {
+      getRepoStats(repoOwner, repoName, authToken).then((data) => {
         setAvatar(data.avatar);
         if (defaultConfig.filters.selected.includes("Forks")) {
           setForks(new Intl.NumberFormat().format(data.forks));
@@ -51,14 +54,16 @@ export const Repo: React.FC<RepoProps> = ({
       });
     }
     if (defaultConfig.filters.selected.includes("Commits")) {
-      getTotalCommits(repoOwner, repoName).then((totalCommits) => {
+      getTotalCommits(repoOwner, repoName, authToken).then((totalCommits) => {
         setTotalCommits(new Intl.NumberFormat().format(totalCommits));
       });
     }
     if (defaultConfig.filters.selected.includes("Frequency")) {
-      getCodeFrequency(repoOwner, repoName, 3).then((numOfCommits) => {
-        setCommitsInThreeWeeks(new Intl.NumberFormat().format(numOfCommits));
-      });
+      getCodeFrequency(repoOwner, repoName, 3, authToken).then(
+        (numOfCommits) => {
+          setCommitsInThreeWeeks(new Intl.NumberFormat().format(numOfCommits));
+        }
+      );
     }
   }, []);
 
