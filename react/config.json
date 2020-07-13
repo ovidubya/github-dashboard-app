@@ -1,0 +1,40 @@
+{
+    "filters": {
+        "all": [
+            "Forks",
+            "Issues",
+            "Stars",
+            "Watchers",
+            "Commits",
+            "Frequency",
+            "Pulls"
+        ],
+        "selected": [
+            "Forks",
+            "Issues",
+            "Stars",
+            "Watchers",
+            "Commits",
+            "Frequency",
+            "Pulls"
+        ]
+    },
+    "repos": [
+        {
+            "owner": "facebook",
+            "repo": "react"
+        },
+        {
+            "owner": "angular",
+            "repo": "angular.js"
+        },
+        {
+            "owner": "emberjs",
+            "repo": "ember.js"
+        },
+        {
+            "owner": "vuejs",
+            "repo": "vue"
+        }
+    ]
+}
