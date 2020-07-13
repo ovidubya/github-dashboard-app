@@ -4,7 +4,8 @@
   "description": "",
   "type": "module",
   "scripts": {
-    "start-react": "parcel react/index.html"
+    "start-react": "parcel react/index.html",
+    "build": "parcel build react/index.html"
   },
   "keywords": [],
   "author": "",
