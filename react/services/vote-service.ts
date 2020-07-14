@@ -15,6 +15,7 @@ export const vote = (repoName, repoOwner) => {
     headers: {
       "Content-Type": "application/json",
     },
+    credentials: "include",
     method: "POST",
     body: JSON.stringify(payload),
   })
