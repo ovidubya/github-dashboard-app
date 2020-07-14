@@ -107,6 +107,11 @@ export const Repo: React.FC<RepoProps> = ({
             Total Commits: <span>{totalCommits}</span>
           </div>
         )}
+        {pulls && (
+          <div>
+            Total Pulls: <span>{pulls}</span>
+          </div>
+        )}
       </RepoStats>
     </Container>
   );
