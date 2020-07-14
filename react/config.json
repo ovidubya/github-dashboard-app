@@ -6,7 +6,6 @@
             "Stars",
             "Watchers",
             "Commits",
-            "Frequency",
             "Pulls"
         ],
         "selected": [
@@ -15,7 +14,6 @@
             "Stars",
             "Watchers",
             "Commits",
-            "Frequency",
             "Pulls"
         ]
     },

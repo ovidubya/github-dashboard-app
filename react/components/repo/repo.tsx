@@ -3,7 +3,7 @@ import styled from "styled-components";
 import {
   getRepoStats,
   getTotalCommits,
-  getCodeFrequency,
+  getTotalPulls,
 } from "../../../lib/services/github";
 import defaultConfig from "../../config.json";
 import { AuthContext } from "../../context/auth";
@@ -26,9 +26,7 @@ export const Repo: React.FC<RepoProps> = ({
   const [stars, setStars] = React.useState<string>("");
   const [watchers, setWatchers] = React.useState<string>("");
   const [totalCommits, setTotalCommits] = React.useState<string>("");
-  const [commitsInThreeWeeks, setCommitsInThreeWeeks] = React.useState<string>(
-    ""
-  );
+  const [pulls, setPulls] = React.useState<string>("");
   const { authToken } = React.useContext(AuthContext);
   const { pollTiming } = React.useContext(PollingContext);
 
@@ -60,12 +58,10 @@ export const Repo: React.FC<RepoProps> = ({
         setTotalCommits(new Intl.NumberFormat().format(totalCommits));
       });
     }
-    if (defaultConfig.filters.selected.includes("Frequency")) {
-      getCodeFrequency(repoOwner, repoName, 3, authToken).then(
-        (numOfCommits) => {
-          setCommitsInThreeWeeks(new Intl.NumberFormat().format(numOfCommits));
-        }
-      );
+    if (defaultConfig.filters.selected.includes("Pulls")) {
+      getTotalPulls(repoOwner, repoName, authToken).then((totalPulls) => {
+        setPulls(new Intl.NumberFormat().format(totalPulls));
+      });
     }
   };
 
@@ -109,12 +105,6 @@ export const Repo: React.FC<RepoProps> = ({
         {totalCommits && (
           <div>
             Total Commits: <span>{totalCommits}</span>
-          </div>
-        )}
-
-        {commitsInThreeWeeks && (
-          <div>
-            Commits (3 weeks): <span>{commitsInThreeWeeks}</span>
           </div>
         )}
       </RepoStats>
