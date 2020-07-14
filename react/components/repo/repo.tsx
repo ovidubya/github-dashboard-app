@@ -9,6 +9,7 @@ import defaultConfig from "../../config.json";
 import { AuthContext } from "../../context/auth";
 import { useInterval } from "../../hooks/useInterval";
 import { PollingContext } from "../../context/poll";
+import { vote } from "../../services/vote-service";
 
 interface RepoProps {
   repoName: string;
@@ -30,7 +31,7 @@ export const Repo: React.FC<RepoProps> = ({
   const { authToken } = React.useContext(AuthContext);
   const { pollTiming } = React.useContext(PollingContext);
 
-  const updateStats = () => {
+  const fetchGithubData = () => {
     if (
       defaultConfig.filters.selected.includes("Forks") ||
       defaultConfig.filters.selected.includes("Issues") ||
@@ -66,15 +67,29 @@ export const Repo: React.FC<RepoProps> = ({
   };
 
   useInterval(() => {
-    updateStats();
+    fetchGithubData();
   }, pollTiming);
 
   React.useEffect(() => {
-    updateStats();
+    fetchGithubData();
   }, []);
 
   return (
-    <Container>
+    <Container
+      onClick={() => {
+        if (confirm(`Are you sure you want to vote for: ${repoName}`)) {
+          vote(repoName, repoOwner).then((result) => {
+            if (result.message === "ok") {
+              alert("You have successfully voted!");
+            } else if (result.messsage === "You already voted") {
+              alert(
+                "You have already voted. Please use a different email or a different client"
+              );
+            }
+          });
+        }
+      }}
+    >
       <RepoImage src={avatar} />
       <RepoStats>
         <h1>{repoName.toUpperCase()}</h1>
