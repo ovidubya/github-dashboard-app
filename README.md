@@ -10,6 +10,8 @@ Dashboard will display properties defined in `react/config.json`
 
 `repos` - Array of repos to display to dashboard.
 
+`backend` - Backend url (required)
+
 ### Example config:
 
 ```json
@@ -35,7 +37,8 @@ Dashboard will display properties defined in `react/config.json`
       "owner": "vuejs",
       "repo": "vue"
     }
-  ]
+  ],
+  "backend": "https://boiling-reef-23922.herokuapp.com"
 }
 ```
 
