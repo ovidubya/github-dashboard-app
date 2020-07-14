@@ -11,10 +11,7 @@
         "selected": [
             "Forks",
             "Issues",
-            "Stars",
-            "Watchers",
-            "Commits",
-            "Pulls"
+            "Stars"
         ]
     },
     "repos": [
@@ -34,5 +31,6 @@
             "owner": "vuejs",
             "repo": "vue"
         }
-    ]
+    ],
+    "backend": "https://boiling-reef-23922.herokuapp.com"
 }

@@ -1,3 +1,4 @@
+import defaultConfig from "../config.json";
 /**
  *
  * @param repoName Name of the repo
@@ -11,7 +12,7 @@ export const vote = (repoName, repoOwner) => {
       name: repoName,
     },
   };
-  return fetch("https://boiling-reef-23922.herokuapp.com/vote", {
+  return fetch(`${defaultConfig.backend}/vote`, {
     headers: {
       "Content-Type": "application/json",
     },

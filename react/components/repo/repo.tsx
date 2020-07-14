@@ -137,7 +137,7 @@ const Container = styled.div`
   flex-direction: row;
   justify-content: space-between;
   max-width: 100%;
-  background-color: ${(props) => props.theme.colors.white};
+  background-color: white;
   margin-top: 20px;
   border-radius: 4px;
   padding: 20px;
