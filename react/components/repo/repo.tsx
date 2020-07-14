@@ -81,7 +81,7 @@ export const Repo: React.FC<RepoProps> = ({
           vote(repoName, repoOwner).then((result) => {
             if (result.message === "ok") {
               alert("You have successfully voted!");
-            } else if (result.messsage === "You already voted") {
+            } else if (result.message === "You already voted") {
               alert(
                 "You have already voted. Please use a different email or a different client"
               );
