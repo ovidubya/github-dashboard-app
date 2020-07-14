@@ -24,7 +24,7 @@ export const InputRange: React.FC<InputRangeProps> = () => {
         name="range"
         type="range"
         min={"10000"}
-        max={"60000"}
+        max={"300000"}
         value={pollTiming}
       />
     </div>
