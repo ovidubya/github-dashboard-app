@@ -1,5 +1,11 @@
 # Github Dashboard App
 
+# Deploy (one click)
+
+<a href="https://app.netlify.com/start/deploy?repository=https://github.com/ovidubya/github-dashboard-app">
+<img src="https://www.netlify.com/img/deploy/button.svg">
+</a>
+
 ## Configure
 
 Dashboard will display properties defined in `react/config.json`
@@ -47,12 +53,6 @@ Dashboard will display properties defined in `react/config.json`
 ```sh
 $ npm i
 ```
-
-# Deploy (one click)
-
-<a href="https://app.netlify.com/start/deploy?repository=https://github.com/ovidubya/github-dashboard-app">
-<img src="https://www.netlify.com/img/deploy/button.svg">
-</a>
 
 ## Run locally
 
